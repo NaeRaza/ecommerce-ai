@@ -85,26 +85,30 @@ Ouvre [http://localhost:3000](http://localhost:3000)
 
 ## Structure du projet
 
+## Structure du projet
+
+```
 ecommerce-ai/
 ├── app/
-│ ├── (auth)/ # Pages login/register
-│ ├── (shop)/ # Catalogue, produits, panier
-│ ├── dashboard/ # Admin
-│ └── api/ # Routes API
+│   ├── (auth)/          # Pages login/register
+│   ├── (shop)/          # Catalogue, produits, panier
+│   ├── dashboard/       # Admin
+│   └── api/             # Routes API
 ├── components/
-│ ├── ui/ # shadcn composants
-│ ├── shop/ # Composants boutique
-│ ├── chat/ # Chatbot widget
-│ └── dashboard/ # Composants admin
+│   ├── ui/              # shadcn composants
+│   ├── shop/            # Composants boutique
+│   ├── chat/            # Chatbot widget
+│   └── dashboard/       # Composants admin
 ├── lib/
-│ ├── prisma.ts # Singleton Prisma
-│ ├── auth.ts # NextAuth config
-│ └── ai/ # Tools + prompts OpenAI
-├── stores/ # Zustand stores
-├── types/ # TypeScript types
+│   ├── prisma.ts        # Singleton Prisma
+│   ├── auth.ts          # NextAuth config
+│   └── ai/              # Tools + prompts OpenAI
+├── stores/              # Zustand stores
+├── types/               # TypeScript types
 ├── prisma/
-│ └── schema.prisma # Schéma DB
-└── proxy.ts # Protection routes
+│   └── schema.prisma    # Schéma DB
+└── proxy.ts             # Protection routes
+```
 
 ## Fonctionnalités
 
