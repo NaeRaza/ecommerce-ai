@@ -1,36 +1,131 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# E-Commerce AI
 
-## Getting Started
+E-commerce fullstack avec chatbot AI intégré.
 
-First, run the development server:
+## Stack Technique
+
+- **Framework** : Next.js 16.2.4 (App Router, Turbopack)
+- **Language** : TypeScript
+- **UI** : Tailwind v4 + shadcn/ui (Nova preset)
+- **Base de données** : PostgreSQL (Neon) + Prisma 7
+- **Auth** : NextAuth v5
+- **AI** : OpenAI GPT-4o + Vercel AI SDK
+- **Paiement** : Stripe
+- **Automatisation** : n8n (self-hosted Docker)
+- **Rate limiting** : Upstash Redis
+- **Images** : Cloudinary
+- **Deploy** : Vercel (app) + VPS (n8n)
+
+## Prérequis
+
+- Node.js >= 18.17
+- npm >= 9
+- Compte Neon (PostgreSQL)
+- Compte Stripe
+- Compte OpenAI
+- Compte Upstash
+- Compte Cloudinary
+- Docker (pour n8n)
+
+## Installation
+
+### 1. Cloner le repo
+
+```bash
+git clone https://github.com/ton-user/ecommerce-ai.git
+cd ecommerce-ai
+```
+
+### 2. Installer les dépendances
+
+```bash
+npm install
+```
+
+### 3. Variables d'environnement
+
+Crée un fichier `.env` et `.env.local` à la racine :
+
+```bash
+# .env (pour Prisma CLI)
+DATABASE_URL="postgresql://..."
+
+# .env.local (pour Next.js)
+DATABASE_URL="postgresql://..."
+AUTH_SECRET="..."
+AUTH_GOOGLE_ID="..."
+AUTH_GOOGLE_SECRET="..."
+OPENAI_API_KEY="..."
+STRIPE_SECRET_KEY="..."
+STRIPE_WEBHOOK_SECRET="..."
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY="..."
+N8N_WEBHOOK_URL="..."
+N8N_WEBHOOK_SECRET="..."
+UPSTASH_REDIS_REST_URL="..."
+UPSTASH_REDIS_REST_TOKEN="..."
+NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME="..."
+CLOUDINARY_API_KEY="..."
+CLOUDINARY_API_SECRET="..."
+```
+
+### 4. Base de données
+
+```bash
+npx prisma migrate dev
+npx prisma generate
+```
+
+### 5. Lancer en développement
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Ouvre [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Structure du projet
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+ecommerce-ai/
+├── app/
+│ ├── (auth)/ # Pages login/register
+│ ├── (shop)/ # Catalogue, produits, panier
+│ ├── dashboard/ # Admin
+│ └── api/ # Routes API
+├── components/
+│ ├── ui/ # shadcn composants
+│ ├── shop/ # Composants boutique
+│ ├── chat/ # Chatbot widget
+│ └── dashboard/ # Composants admin
+├── lib/
+│ ├── prisma.ts # Singleton Prisma
+│ ├── auth.ts # NextAuth config
+│ └── ai/ # Tools + prompts OpenAI
+├── stores/ # Zustand stores
+├── types/ # TypeScript types
+├── prisma/
+│ └── schema.prisma # Schéma DB
+└── proxy.ts # Protection routes
 
-## Learn More
+## Fonctionnalités
 
-To learn more about Next.js, take a look at the following resources:
+- 🛍 Catalogue produits avec filtres
+- 🛒 Panier persistant
+- 💳 Paiement Stripe
+- 📦 Suivi de commandes
+- 🤖 Chatbot AI (stock, commandes, recommandations)
+- 🖥 Dashboard Admin
+- ⚡ Automatisation n8n (emails, Slack, Google Sheets)
+- 🔐 Auth email/password + Google OAuth
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Avancement
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [x] Setup & Fondations
+- [x] API Categories (CRUD)
+- [x] API Products (CRUD)
+- [ ] API Orders
+- [ ] API Cart
+- [ ] Auth (NextAuth v5)
+- [ ] Frontend
+- [ ] Chatbot AI
+- [ ] n8n
+- [ ] Production
