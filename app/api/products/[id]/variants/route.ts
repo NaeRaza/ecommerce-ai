@@ -57,7 +57,7 @@ export async function POST(
 
     const { size, color, stock, price } = parsed.data;
 
-    const finalPrice = price ?? priceProduct?.price;
+    const finalPrice = price ?? priceProduct.price;
 
     if (finalPrice == null) {
       return NextResponse.json({ error: "Prix introuvable" }, { status: 400 });
@@ -76,7 +76,7 @@ export async function POST(
       },
     });
 
-    return NextResponse.json(productVariant, { status: 200 });
+    return NextResponse.json(productVariant, { status: 201 });
   } catch (e) {
     if (e instanceof Error && "code" in e && e.code === "P2002") {
       return NextResponse.json(

@@ -90,30 +90,53 @@ Ouvre [http://localhost:3000](http://localhost:3000)
 ```
 ecommerce-ai/
 ├── app/
-│   ├── (auth)/          # Pages login/register
-│   ├── (shop)/          # Catalogue, produits, panier
-│   ├── dashboard/       # Admin
-│   └── api/             # Routes API
+│   ├── (auth)/              # Pages login/register
+│   ├── (shop)/              # Catalogue, produits, panier
+│   ├── dashboard/           # Admin
+│   └── api/
+│       ├── auth/            # NextAuth + register
+│       ├── categories/      # CRUD catégories
+│       ├── products/        # CRUD produits + variants
+│       └── orders/          # Commandes
 ├── components/
-│   ├── ui/              # shadcn composants
-│   ├── shop/            # Composants boutique
-│   ├── chat/            # Chatbot widget
-│   └── dashboard/       # Composants admin
+│   ├── ui/                  # shadcn composants
+│   ├── shop/                # Composants boutique
+│   ├── chat/                # Chatbot widget
+│   └── dashboard/           # Composants admin
 ├── lib/
-│   ├── prisma.ts        # Singleton Prisma
-│   ├── auth.ts          # NextAuth config
-│   └── ai/              # Tools + prompts OpenAI
-├── stores/              # Zustand stores
-├── types/               # TypeScript types
+│   ├── prisma.ts            # Singleton Prisma
+│   ├── auth.ts              # NextAuth v5 config
+│   ├── utils.ts             # slugify + helpers
+│   └── ai/                  # Tools + prompts OpenAI
+├── stores/
+│   └── cart.store.ts        # Zustand cart
+├── types/
+│   ├── next-auth.d.ts       # Types NextAuth
+│   └── cart.ts              # Type CartItem
 ├── prisma/
-│   └── schema.prisma    # Schéma DB
-└── proxy.ts             # Protection routes
+│   └── schema.prisma        # Schéma DB
+└── proxy.ts
+```
+
+## API Routes
+
+```
+| Method | Route | Description |
+|--------|-------|-------------|
+| GET/POST | `/api/categories` | Liste + créer catégorie |
+| GET/PUT/DELETE | `/api/categories/[id]` | Détail + modifier + supprimer |
+| GET/POST | `/api/products` | Liste + créer produit |
+| GET/PUT/DELETE | `/api/products/[id]` | Détail + modifier + supprimer |
+| GET/POST | `/api/products/[id]/variants` | Variants d'un produit |
+| GET/POST | `/api/orders` | Liste + créer commande |
+| GET/PATCH | `/api/orders/[id]` | Détail + modifier statut |
+| POST | `/api/auth/register` | Créer un compte |
 ```
 
 ## Fonctionnalités
 
 - 🛍 Catalogue produits avec filtres
-- 🛒 Panier persistant
+- 🛒 Panier persistant (Zustand + localStorage)
 - 💳 Paiement Stripe
 - 📦 Suivi de commandes
 - 🤖 Chatbot AI (stock, commandes, recommandations)
@@ -123,13 +146,22 @@ ecommerce-ai/
 
 ## Avancement
 
-- [x] Setup & Fondations
+- [x] Setup & Fondations (Next.js, Tailwind, shadcn)
+- [x] Prisma 7 + Neon PostgreSQL
+- [x] Schema DB + migrations
 - [x] API Categories (CRUD)
 - [x] API Products (CRUD)
-- [ ] API Orders
-- [ ] API Cart
-- [ ] Auth (NextAuth v5)
-- [ ] Frontend
-- [ ] Chatbot AI
-- [ ] n8n
-- [ ] Production
+- [x] API Products Variants (GET + POST)
+- [x] API Orders (GET, POST, PATCH)
+- [x] Zustand Cart Store
+- [x] Auth NextAuth v5 (JWT)
+- [x] Pages Login + Register
+- [x] proxy.ts protection routes
+- [ ] Layout principal (Navbar + Footer)
+- [ ] Page catalogue produits
+- [ ] Page produit détail
+- [ ] Page panier + checkout
+- [ ] Dashboard Admin
+- [ ] Chatbot AI (OpenAI + 5 tools)
+- [ ] n8n Automatisation
+- [ ] Tests + Production
